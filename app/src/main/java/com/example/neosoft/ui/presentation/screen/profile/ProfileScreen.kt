@@ -13,33 +13,45 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.neosoft.ui.theme.register_bg
+import com.stevdzasan.messagebar.ContentWithMessageBar
+import com.stevdzasan.messagebar.MessageBarPosition
+import com.stevdzasan.messagebar.rememberMessageBarState
 
 @Composable
 fun ProfileScreen() {
     val profileScreenViewModel: ProfileScreenViewModel = viewModel()
-    Box(
-        Modifier
-            .background(register_bg)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
+    val messageBarState = rememberMessageBarState()
+    ContentWithMessageBar(
+        messageBarState = messageBarState,
+        errorMaxLines = 3,
+        position = MessageBarPosition.TOP,
+
         ) {
-            Box(
+        Box(
+            Modifier
+                .background(register_bg)
+        ) {
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
             ) {
-                ProfileHeader()
-                Box(Modifier.padding(top = 240.dp)) {
-                    ProfileContent(viewModel = profileScreenViewModel)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    ProfileHeader()
+                    Box(Modifier.padding(top = 240.dp)) {
+                        ProfileContent(viewModel = profileScreenViewModel,messageBarState)
+                    }
+
                 }
 
+
             }
-
-
         }
     }
+
 }
 
 @Preview
