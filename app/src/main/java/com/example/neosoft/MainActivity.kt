@@ -6,11 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.neosoft.ui.presentation.screen.RegisterScreen
+import com.example.neosoft.ui.presentation.screen.profile.ProfileScreen
 import com.example.neosoft.ui.theme.NeoSoftTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   RegisterScreen()
+                   ProfileScreen()
                 }
             }
         }
@@ -36,6 +35,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     NeoSoftTheme {
-        RegisterScreen()
+        ProfileScreen()
     }
 }
