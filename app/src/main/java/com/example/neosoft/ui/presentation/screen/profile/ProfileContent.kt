@@ -7,27 +7,40 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardElevation
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.neosoft.ui.presentation.components.ProfileTextField
-import com.example.neosoft.ui.theme.register_pink
+import com.example.neosoft.ui.theme.linearGradient
 
 @Composable
 fun ProfileContent(viewModel: ProfileScreenViewModel) {
-    Box(modifier = Modifier.padding(16.dp).background(Color.White)) {
+    Box(
+        modifier = Modifier
+            .padding(16.dp)
+            .background(Color.White)
+            .padding(16.dp)
+    ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = "USER PROFILE",
-
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center
             )
@@ -39,11 +52,52 @@ fun ProfileContent(viewModel: ProfileScreenViewModel) {
                 onValueChange = { viewModel.textFieldUserName = it }
             )
             ProfileTextField(
-                label = "User Name",
-                hint = "Enter User Name",
-                value = viewModel.textFieldUserName,
-                onValueChange = { viewModel.textFieldUserName = it }
+                label = "Email Id",
+                hint = "Enter Email",
+                imageVector = Icons.Default.Email,
+                value = viewModel.textFieldEmail,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Email
+                ),
+                onValueChange = { viewModel.textFieldEmail = it }
             )
+            ProfileTextField(
+                label = "Mobile Number",
+                hint = "Enter your 10 digit mobile number",
+                imageVector = Icons.Default.Phone,
+                value = viewModel.textFieldMobile,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Number
+                ),
+                onValueChange = { viewModel.textFieldMobile = it }
+            )
+            ProfileTextField(
+                label = "Date of Birth",
+                hint = "DD / MM / YYYY",
+                imageVector = Icons.Default.Create,
+                value = viewModel.textFieldDate,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Number
+                ),
+                onValueChange = { viewModel.textFieldDate = it }
+            )
+
+            Spacer(modifier = Modifier.height(50.dp))
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(30.dp))
+                    .background(linearGradient)
+                    .padding(10.dp),
+                contentAlignment = Alignment.Center,
+
+                ) {
+                Text(text = "Save", fontSize = 20.sp, color = Color.White)
+            }
         }
     }
 }
