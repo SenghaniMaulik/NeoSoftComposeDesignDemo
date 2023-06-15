@@ -1,6 +1,7 @@
 package com.example.neosoft.ui.presentation.screen.profile
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.neosoft.ui.presentation.components.ProfileTextField
 import com.example.neosoft.ui.theme.linearGradient
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProfileContent(viewModel: ProfileScreenViewModel) {
@@ -79,16 +81,41 @@ fun ProfileContent(viewModel: ProfileScreenViewModel) {
                 imageVector = Icons.Default.Create,
                 value = viewModel.textFieldDate,
                 keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Next,
+                    imeAction = ImeAction.Done,
                     keyboardType = KeyboardType.Number
                 ),
                 onValueChange = { viewModel.textFieldDate = it }
             )
 
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             Box(
                 modifier = Modifier
+                    .clickable {
+                        /*if (viewModel.textFieldUserName.isEmpty()) {
+                            messageBarState.addError(Exception("Please enter name"))
+                        } else if (signUpScreenViewModel.textFieldEmail.isEmpty()) {
+                            messageBarState.addError(Exception("Please enter email"))
+                        } else if (!isValidEmail(signUpScreenViewModel.textFieldEmail)) {
+                            messageBarState.addError(Exception("Please enter valid email"))
+                        } else if (signUpScreenViewModel.textFieldPassword.isEmpty()) {
+                            messageBarState.addError(Exception("Please enter password"))
+                        } else if (!validatePasswordInput(signUpScreenViewModel.textFieldPassword)) {
+                            messageBarState.addError(Exception("Please enter valid password"))
+                        } else {
+                            coroutineScope.launch {
+                                val userDataString = "${signUpScreenViewModel.textFieldName}," +
+                                        "${signUpScreenViewModel.textFieldEmail}," +
+                                        signUpScreenViewModel.textFieldPassword
+                                context.saveString(
+                                    PreferencesManager.KEY_STR_EMAIL_PASS,
+                                    userDataString
+                                )
+                                context.saveBoolean(PreferencesManager.KEY_BOOL_IS_LOGIN, true)
+                                navToHome(signUpScreenViewModel.textFieldName)
+                            }
+                        }*/
+                    }
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(30.dp))
                     .background(linearGradient)
